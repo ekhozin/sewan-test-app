@@ -1,0 +1,92 @@
+{
+  "name": "sewan",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "",
+  "author": "Evgeniy Khozin",
+  "license": "MIT",
+  "scripts": {
+    "start": "cross-env NODE_ENV=development webpack-dev-server --progress",
+    "build:prod": "cross-env NODE_ENV=production webpack --progress",
+    "lint": "eslint --ext .js --ext .jsx src --color",
+    "lint:fix": "eslint --fix .",
+    "env": "cp .env.default .env",
+    "start:prod": "cross-env NODE_ENV=production webpack-dev-server --progress",
+    "prettier:format": "prettier --write"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "yarn lint:fix",
+      "git add"
+    ]
+  },
+  "resolutions": {
+    "styled-components": "^5"
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.4.0",
+    "axios": "^0.19.2",
+    "babel-plugin-styled-components": "^1.12.0",
+    "connected-react-router": "^6.8.0",
+    "history": "4.10.1",
+    "humps": "^2.0.1",
+    "normalize.css": "^8.0.1",
+    "prop-types": "^15.7.2",
+    "qs": "^6.9.4",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-redux": "^7.2.1",
+    "react-router-dom": "^5.2.0",
+    "react-toastify": "^6.0.8",
+    "redux": "^4.0.5",
+    "redux-saga": "^1.1.3",
+    "regenerator-runtime": "^0.13.7",
+    "reselect": "^4.0.0",
+    "styled-components": "^5.2.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.1",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.10.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.11.0",
+    "@babel/plugin-proposal-optional-chaining": "^7.11.0",
+    "@babel/preset-env": "^7.11.0",
+    "@babel/preset-react": "^7.10.4",
+    "autoprefixer": "^9.8.6",
+    "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.1.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "cross-env": "^7.0.2",
+    "css-loader": "^4.2.1",
+    "dotenv-webpack": "^2.0.0",
+    "eslint": "^7.7.0",
+    "eslint-config-prettier": "^6.12.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.20.6",
+    "eslint-plugin-react-hooks": "^4.1.0",
+    "file-loader": "^6.0.0",
+    "html-webpack-plugin": "^4.3.0",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.11",
+    "mini-css-extract-plugin": "^0.10.0",
+    "node-sass": "^4.14.1",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "postcss-loader": "^3.0.0",
+    "prettier": "2.1.2",
+    "react-hot-loader": "^4.12.21",
+    "redux-devtools-extension": "^2.13.8",
+    "sass-loader": "^9.0.3",
+    "style-loader": "^1.2.1",
+    "terser-webpack-plugin": "^4.1.0",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  }
+}
