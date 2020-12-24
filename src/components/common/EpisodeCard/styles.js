@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -23,16 +24,8 @@ const CardTitle = styled.h2`
     margin: 0 0 0.625rem;
 `;
 
-const Name = styled.button`
+const Name = styled(Link)`
     color: ${(props) => props.theme.colors.primary};
-    text-decoration: underline;
-    background: none;
-    border: none;
-    padding: 0;
-
-    &:hover {
-        cursor: pointer;
-    }
 `;
 
 const Date = styled.div`

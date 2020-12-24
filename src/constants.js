@@ -1,14 +1,23 @@
-/**
- * API
- */
-const API_ENDPOINTS = {};
+const DEFAULT_PAGINATION = {
+    next: 2,
+    prev: null,
+    pages: 1,
+};
 
 /**
  * PAGE ROUTES
  */
 const ROUTES = {
     HOME: '/',
-    PROFILE: '/profiles/:id',
+    CHARACTER: '/characters/:id',
+    EPISODE: '/episodes/:id',
 };
 
-export { API_ENDPOINTS, ROUTES };
+/**
+ * COMMON
+ */
+const EMPTY_ARRAY = [];
+const EMPTY_OBJECT = {};
+const EMPTY_STRING = '';
+
+export { ROUTES, EMPTY_ARRAY, EMPTY_OBJECT, DEFAULT_PAGINATION, EMPTY_STRING };

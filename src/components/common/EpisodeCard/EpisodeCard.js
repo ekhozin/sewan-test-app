@@ -14,44 +14,37 @@ import {
 } from './styles';
 
 function EpisodeCard(props) {
-    const { id, name, date, characters, onCharacterClick, onEpisodeClick } = props;
-
-    const handleEpisodeClick = () => onEpisodeClick(id);
+    const { name, airDate, characters, link } = props;
 
     return (
         <Container>
             <MainInfo>
                 <CardTitle>
-                    <Name onClick={handleEpisodeClick}>{name}</Name>
+                    <Name to={link}>{name}</Name>
                 </CardTitle>
                 <div>
                     {`${texts.episodeAirDate}:`}
-                    <Date>{date}</Date>
+                    <Date>{airDate}</Date>
                 </div>
             </MainInfo>
             <AdditionalInfo>
                 <CharactersTitle>{`${texts.characters}:`}</CharactersTitle>
-                <EpisodeCardCharacters
-                    characters={characters}
-                    onCharacterClick={onCharacterClick}
-                />
+                <EpisodeCardCharacters characters={characters} />
             </AdditionalInfo>
         </Container>
     );
 }
 
 EpisodeCard.propTypes = {
-    id: PropTypes.number.isRequired,
+    link: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    date: PropTypes.string.isRequired,
+    airDate: PropTypes.string.isRequired,
     characters: PropTypes.arrayOf(
         PropTypes.shape({
-            id: PropTypes.number.isRequired,
+            link: PropTypes.string.isRequired,
             name: PropTypes.string.isRequired,
         }),
     ),
-    onEpisodeClick: PropTypes.func.isRequired,
-    onCharacterClick: PropTypes.func.isRequired,
 };
 
 const memoized = React.memo(EpisodeCard);

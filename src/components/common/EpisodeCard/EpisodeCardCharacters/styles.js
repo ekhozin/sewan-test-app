@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Characters = styled.div`
@@ -5,19 +6,12 @@ const Characters = styled.div`
     flex-wrap: wrap;
 `;
 
-const Character = styled.button`
+const Character = styled(Link)`
+    display: inline-block;
     color: ${(props) => props.theme.colors.lightText};
-    text-decoration: underline;
-    background: none;
-    border: none;
-    padding: 0;
 
     :not(:last-child) {
         margin-right: 0.3125rem;
-    }
-
-    &:hover {
-        cursor: pointer;
     }
 `;
 

@@ -1,39 +1,94 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+import { generatePath } from 'react-router-dom';
 
+import texts from '@/texts';
+import { ROUTES } from '@/constants';
 import { EpisodesList } from '@/components/lists';
+import { Pager } from '@/components/common/Pager';
+import { Row } from '@/components/common/Row';
+import { FullscreenLoader } from '@/components/common/FullscreenLoader';
+import { fetchEpisodesRequest } from '@/ducks/episodes/slice';
+import {
+    selectEpisodesToUIList,
+    selectIsEpisodesLoading,
+    selectPaginationToUI,
+} from '@/ducks/episodes/selectors';
 
-const episodes = [
-    {
-        id: 1,
-        name: 'Episode 1',
-        date: 'December 2, 2013',
-        characters: [
-            { id: 1, name: 'Name 1' },
-            { id: 2, name: 'Name 2' },
-        ],
-    },
-    {
-        id: 2,
-        name: 'Episode 2',
-        date: 'December 5, 2013',
-        characters: [
-            { id: 3, name: 'Name 3' },
-            { id: 4, name: 'Name 4' },
-            { id: 5, name: 'Name 5' },
-            { id: 6, name: 'Name 6' },
-            { id: 7, name: 'Name 7' },
-            { id: 8, name: 'Name 8' },
-            { id: 9, name: 'Name 9' },
-            { id: 10, name: 'Name 10' },
-            { id: 11, name: 'Name 11' },
-            { id: 12, name: 'Name 12' },
-        ],
-    },
-];
+function HomePageContainer(props) {
+    const {
+        history: { push },
+    } = props;
 
-function HomePageContainer() {
-    return <EpisodesList items={episodes} />;
+    const dispatch = useDispatch();
+    const episodes = useSelector(selectEpisodesToUIList);
+    const isLoading = useSelector(selectIsEpisodesLoading);
+    const { page, prevPage, nextPage, isVisible } = useSelector(selectPaginationToUI);
+
+    React.useEffect(() => {
+        dispatch(fetchEpisodesRequest());
+    }, [dispatch]);
+
+    const handleEpisodeClick = React.useCallback(
+        (episodeId) => {
+            const path = generatePath(ROUTES.EPISODE, { id: episodeId });
+            push(path);
+        },
+        [push],
+    );
+
+    const handlePageChange = React.useCallback(
+        (newPage) => {
+            dispatch(fetchEpisodesRequest({ page: newPage }));
+        },
+        [dispatch],
+    );
+
+    const handleCharacterClick = React.useCallback(
+        (characterId) => {
+            const path = generatePath(ROUTES.CHARACTER, { id: characterId });
+            push(path);
+        },
+        [push],
+    );
+
+    const pagination = isVisible && (
+        <Row>
+            <Pager
+                onChange={handlePageChange}
+                page={page}
+                nextPage={nextPage}
+                prevPage={prevPage}
+            />
+        </Row>
+    );
+
+    const content = episodes.length ? (
+        <EpisodesList
+            items={episodes}
+            onEpisodeClick={handleEpisodeClick}
+            onCharacterClick={handleCharacterClick}
+        />
+    ) : (
+        texts.noData
+    );
+
+    return (
+        <>
+            {isLoading && <FullscreenLoader />}
+            {pagination}
+            <Row>{content}</Row>
+            {pagination}
+        </>
+    );
 }
+
+HomePageContainer.propTypes = {
+    history: PropTypes.shape({
+        push: PropTypes.func.isRequired,
+    }).isRequired,
+};
 
 const memoized = React.memo(HomePageContainer);
 

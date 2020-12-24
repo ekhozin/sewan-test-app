@@ -13,4 +13,7 @@ export const theme = {
     breakpoints: {
         sm: '768px',
     },
+    zIndexes: {
+        loader: 1000,
+    },
 };

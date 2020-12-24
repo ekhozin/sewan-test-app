@@ -1,2 +1,3 @@
 export * from './HomePageContainer';
-export * from './ProfilePageContainer';
+export * from './CharacterPageContainer';
+export * from './EpisodePageContainer';

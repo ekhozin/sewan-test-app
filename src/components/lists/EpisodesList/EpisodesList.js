@@ -4,40 +4,30 @@ import PropTypes from 'prop-types';
 import { List, ListItem } from '@/components/common/List';
 import { EpisodeCard } from '@/components/common/EpisodeCard';
 
-function EpisodesList(props) {
-    const { items, onCharacterClick, onEpisodeClick } = props;
-
-    return (
-        <List>
-            {items.map((item) => (
-                <ListItem key={item.id}>
-                    <EpisodeCard
-                        {...item}
-                        onCharacterClick={onCharacterClick}
-                        onEpisodeClick={onEpisodeClick}
-                    />
-                </ListItem>
-            ))}
-        </List>
-    );
-}
+const EpisodesList = ({ items }) => (
+    <List>
+        {items.map((item) => (
+            <ListItem key={item.link}>
+                <EpisodeCard {...item} />
+            </ListItem>
+        ))}
+    </List>
+);
 
 EpisodesList.propTypes = {
     items: PropTypes.arrayOf(
         PropTypes.shape({
-            id: PropTypes.number.isRequired,
+            link: PropTypes.string.isRequired,
             name: PropTypes.string.isRequired,
-            date: PropTypes.string.isRequired,
+            airDate: PropTypes.string.isRequired,
             characters: PropTypes.arrayOf(
                 PropTypes.shape({
-                    id: PropTypes.number.isRequired,
+                    link: PropTypes.string.isRequired,
                     name: PropTypes.string.isRequired,
                 }),
             ),
         }),
     ),
-    onEpisodeClick: PropTypes.func.isRequired,
-    onCharacterClick: PropTypes.func.isRequired,
 };
 
 const memoized = React.memo(EpisodesList);

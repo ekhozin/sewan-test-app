@@ -1,25 +1,10 @@
 import { all, fork } from 'redux-saga/effects';
 
-import { watchAppSaga } from '@/ducks/app/sagas';
-import { watchPatientsSaga } from '@/ducks/patients/sagas';
-import { watchCommentsSaga } from '@/ducks/comments/sagas';
-import { watchNavSaga } from '@/ducks/nav/sagas';
-import { watchAppointmentsSaga } from '@/ducks/appointments/sagas';
-import { watchTablesSaga } from '@/ducks/tables/sagas';
-import { watchTreatPhasesSaga } from '@/ducks/treatPhases/sagas';
-import { watchPatientStatusesSaga } from '@/ducks/patientStatuses/sagas';
+import { watchEpisodesSaga } from '@/ducks/episodes/sagas';
+import { watchCharactersSaga } from '@/ducks/characters/sagas';
 
 function* rootSaga() {
-    yield all([
-        fork(watchAppSaga),
-        fork(watchPatientsSaga),
-        fork(watchCommentsSaga),
-        fork(watchNavSaga),
-        fork(watchAppointmentsSaga),
-        fork(watchTablesSaga),
-        fork(watchTreatPhasesSaga),
-        fork(watchPatientStatusesSaga),
-    ]);
+    yield all([fork(watchEpisodesSaga), fork(watchCharactersSaga)]);
 }
 
 export { rootSaga };
