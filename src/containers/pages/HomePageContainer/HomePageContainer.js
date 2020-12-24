@@ -6,6 +6,7 @@ const episodes = [
     {
         id: 1,
         name: 'Episode 1',
+        date: 'December 2, 2013',
         characters: [
             { id: 1, name: 'Name 1' },
             { id: 2, name: 'Name 2' },
@@ -14,6 +15,7 @@ const episodes = [
     {
         id: 2,
         name: 'Episode 2',
+        date: 'December 5, 2013',
         characters: [
             { id: 3, name: 'Name 3' },
             { id: 4, name: 'Name 4' },
