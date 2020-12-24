@@ -2,7 +2,7 @@
   "name": "sewan",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "",
+  "repository": "https://github.com/ekhozin/sewan-test-app",
   "author": "Evgeniy Khozin",
   "license": "MIT",
   "scripts": {
@@ -32,7 +32,6 @@
     "@apollo/client": "^3.3.6",
     "@reduxjs/toolkit": "^1.4.0",
     "babel-plugin-styled-components": "^1.12.0",
-    "connected-react-router": "^6.8.0",
     "graphql": "^15.4.0",
     "history": "4.10.1",
     "humps": "^2.0.1",

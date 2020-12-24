@@ -6,6 +6,7 @@
 - [Eslint](https://github.com/eslint/eslint)
 - [Webpack 4.x](https://webpack.js.org/)
 - [Redux saga](https://redux-saga.js.org/)
+- [Apollo](https://www.apollographql.com/)
 
 # Installation
 
