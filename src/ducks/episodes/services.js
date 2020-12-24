@@ -2,11 +2,11 @@ import { gql } from '@apollo/client';
 
 import { client } from '@/client';
 
-function fetchEpisodes({ page = 1 } = {}) {
+function fetchEpisodes({ page = 1, search = '' } = {}) {
     return client.query({
         query: gql`
             query {
-                episodes(page: ${page}) {
+                episodes(page: ${page}, filter: { name: "${search}" } ) {
                     info {
                         next,
                         prev,

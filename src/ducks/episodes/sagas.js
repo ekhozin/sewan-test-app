@@ -16,9 +16,9 @@ import { mapEpisodes } from './mappers';
 
 function* fetchEpisodesSaga({ payload = {} }) {
     try {
-        const { page } = payload;
+        const { page, search } = payload;
         yield put(startIsLoading());
-        const { data } = yield call(fetchEpisodes, { page });
+        const { data } = yield call(fetchEpisodes, { page, search });
         const { byId, ids, charactersById } = yield call(mapEpisodes, data.episodes?.results);
         const pagination = yield call(mapPagination, data.episodes?.info);
 
@@ -29,7 +29,8 @@ function* fetchEpisodesSaga({ payload = {} }) {
                 pagination,
             }),
         );
-    } catch {
+    } catch (err) {
+        console.dir(err);
         yield call(showErrorNotification, texts.fetchEpisodesError);
     } finally {
         yield put(stopIsLoading());

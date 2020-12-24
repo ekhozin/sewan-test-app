@@ -21,6 +21,11 @@ const addDateLink = new ApolloLink((operation, forward) =>
 const client = new ApolloClient({
     cache: new InMemoryCache(),
     link: addDateLink.concat(httpLink),
+    defaultOptions: {
+        query: {
+            errorPolicy: 'all',
+        },
+    },
 });
 
 export { client };

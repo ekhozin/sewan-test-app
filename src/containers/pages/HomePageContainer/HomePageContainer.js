@@ -1,14 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { generatePath } from 'react-router-dom';
 
 import texts from '@/texts';
-import { ROUTES } from '@/constants';
 import { EpisodesList } from '@/components/lists';
 import { Pager } from '@/components/common/Pager';
 import { Row } from '@/components/common/Row';
 import { FullscreenLoader } from '@/components/common/FullscreenLoader';
+import { Searchbar } from '@/components/common/Searchbar';
 import { fetchEpisodesRequest } from '@/ducks/episodes/slice';
 import {
     selectEpisodesToUIList,
@@ -16,27 +14,17 @@ import {
     selectPaginationToUI,
 } from '@/ducks/episodes/selectors';
 
-function HomePageContainer(props) {
-    const {
-        history: { push },
-    } = props;
-
+function HomePageContainer() {
     const dispatch = useDispatch();
     const episodes = useSelector(selectEpisodesToUIList);
     const isLoading = useSelector(selectIsEpisodesLoading);
     const { page, prevPage, nextPage, isVisible } = useSelector(selectPaginationToUI);
 
+    const [search, setSearch] = React.useState('');
+
     React.useEffect(() => {
         dispatch(fetchEpisodesRequest());
     }, [dispatch]);
-
-    const handleEpisodeClick = React.useCallback(
-        (episodeId) => {
-            const path = generatePath(ROUTES.EPISODE, { id: episodeId });
-            push(path);
-        },
-        [push],
-    );
 
     const handlePageChange = React.useCallback(
         (newPage) => {
@@ -45,13 +33,14 @@ function HomePageContainer(props) {
         [dispatch],
     );
 
-    const handleCharacterClick = React.useCallback(
-        (characterId) => {
-            const path = generatePath(ROUTES.CHARACTER, { id: characterId });
-            push(path);
-        },
-        [push],
-    );
+    const handleSearch = React.useCallback(() => {
+        dispatch(fetchEpisodesRequest({ page: 1, search: search.trim() }));
+    }, [dispatch, search]);
+
+    const handleClearSearch = React.useCallback(() => {
+        setSearch('');
+        dispatch(fetchEpisodesRequest({ page: 1 }));
+    }, [dispatch]);
 
     const pagination = isVisible && (
         <Row>
@@ -64,31 +53,25 @@ function HomePageContainer(props) {
         </Row>
     );
 
-    const content = episodes.length ? (
-        <EpisodesList
-            items={episodes}
-            onEpisodeClick={handleEpisodeClick}
-            onCharacterClick={handleCharacterClick}
-        />
-    ) : (
-        texts.noData
-    );
+    const content = episodes.length ? <EpisodesList items={episodes} /> : texts.noData;
 
     return (
         <>
             {isLoading && <FullscreenLoader />}
+            <Row>
+                <Searchbar
+                    value={search}
+                    onSearch={handleSearch}
+                    onClear={handleClearSearch}
+                    onChange={setSearch}
+                />
+            </Row>
             {pagination}
             <Row>{content}</Row>
             {pagination}
         </>
     );
 }
-
-HomePageContainer.propTypes = {
-    history: PropTypes.shape({
-        push: PropTypes.func.isRequired,
-    }).isRequired,
-};
 
 const memoized = React.memo(HomePageContainer);
 
