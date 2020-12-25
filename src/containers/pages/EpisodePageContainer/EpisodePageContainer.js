@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { fetchEpisodeRequest, clearEpisode } from '@/ducks/episodes/slice';
+import { fetchEpisodeRequest, clearEpisode } from '@/ducks/episodes/reducer';
 import {
     selectEpisodeCharactersToUI,
     selectEpisodeInfoToUI,
@@ -13,6 +13,9 @@ import { Row } from '@/components/common/Row';
 import { EpisodeInfo } from '@/components/shared/EpisodeInfo';
 import { FullscreenLoader } from '@/components/common/FullscreenLoader';
 
+/**
+ * React component. Renders episodes's page connected to redux store.
+ */
 function EpisodePageContainer(props) {
     const {
         match: {

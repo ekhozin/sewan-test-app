@@ -5,6 +5,9 @@ import texts from '@/texts';
 import { Row } from '@/components/common/Row';
 import { InfoBlock } from '@/components/common/InfoBlock';
 
+/**
+ * React component. Renders episodes's information.
+ */
 function EpisodeInfo(props) {
     const { name, airDate } = props;
 

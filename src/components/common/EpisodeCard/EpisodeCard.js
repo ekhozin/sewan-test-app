@@ -13,6 +13,10 @@ import {
     CharactersTitle,
 } from './styles';
 
+/**
+ * React component.
+ * Renders EpisodeCard.
+ */
 function EpisodeCard(props) {
     const { name, airDate, characters, link } = props;
 

@@ -5,6 +5,9 @@ import texts from '@/texts';
 import { Row } from '@/components/common/Row';
 import { InfoBlock } from '@/components/common/InfoBlock';
 
+/**
+ * React component. Renders characher's information.
+ */
 function CharacterInfo(props) {
     const { name, status, gender, species } = props;
 

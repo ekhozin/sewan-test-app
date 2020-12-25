@@ -4,6 +4,9 @@ import { ROUTES } from '@/constants';
 import texts from '@/texts';
 import { StyledHeader, StyledNavLink } from './styles';
 
+/**
+ * React component. Renders application's header.
+ */
 function Header() {
     return (
         <StyledHeader>

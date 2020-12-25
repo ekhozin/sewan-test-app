@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import { reducer as episodesReducer } from '@/ducks/episodes/slice';
-import { reducer as charactersReducer } from '@/ducks/characters/slice';
+import { reducer as episodesReducer } from '@/ducks/episodes/reducer';
+import { reducer as charactersReducer } from '@/ducks/characters/reducer';
 
 function createRootReducer() {
     return combineReducers({

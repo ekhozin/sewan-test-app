@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 
 import { Title, Data } from './styles';
 
+/**
+ * React component. Renders informational block.
+ */
 function InfoBlock(props) {
     const { title, data } = props;
 

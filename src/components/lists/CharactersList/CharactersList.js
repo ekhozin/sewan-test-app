@@ -4,6 +4,9 @@ import PropTypes from 'prop-types';
 
 import { List, ListItem } from '@/components/common/List';
 
+/**
+ * React component. Renders list of items. Each item is a link.
+ */
 const CharactersList = ({ items }) => (
     <List>
         {items.map(({ id, name, link }) => (

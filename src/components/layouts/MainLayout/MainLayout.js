@@ -4,6 +4,9 @@ import PropTypes from 'prop-types';
 import { Header } from '@/components/common/Header';
 import { StyledMainLayout, Content, HeaderWrapper } from './styles';
 
+/**
+ * React component. Renders main layout for page: header and content.
+ */
 const MainLayout = ({ children }) => (
     <StyledMainLayout>
         <HeaderWrapper>

@@ -7,13 +7,17 @@ import { Pager } from '@/components/common/Pager';
 import { Row } from '@/components/common/Row';
 import { FullscreenLoader } from '@/components/common/FullscreenLoader';
 import { Searchbar } from '@/components/common/Searchbar';
-import { fetchEpisodesRequest } from '@/ducks/episodes/slice';
+import { fetchEpisodesRequest } from '@/ducks/episodes/reducer';
 import {
     selectEpisodesToUIList,
     selectIsEpisodesLoading,
     selectPaginationToUI,
 } from '@/ducks/episodes/selectors';
 
+/**
+ * React component. Renders home page connected to redux store.
+ * List of episodes is rendered on the home page.
+ */
 function HomePageContainer() {
     const dispatch = useDispatch();
     const episodes = useSelector(selectEpisodesToUIList);

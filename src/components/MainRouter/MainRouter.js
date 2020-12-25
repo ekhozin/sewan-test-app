@@ -8,6 +8,9 @@ import {
     EpisodePageContainer,
 } from '@/containers/pages';
 
+/**
+ * React component. Renders all application's pages.
+ */
 function MainRouter() {
     return (
         <Switch>

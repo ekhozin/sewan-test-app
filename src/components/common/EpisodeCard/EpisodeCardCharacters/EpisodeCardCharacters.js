@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 
 import { Characters, Character } from './styles';
 
+/**
+ * React component. Renders list of characters.
+ */
 const EpisodeCardCharacters = ({ characters }) => (
     <Characters>
         {characters.map(({ link, name }) => (

@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 
 import texts from '@/texts';
 
+/**
+ * React component. Renders input with "search" and "clear" buttons.
+ */
 function Searchbar(props) {
     const { value, onChange, onSearch, onClear, placeholder } = props;
 

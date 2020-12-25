@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 
 import { StyledListItem } from './styles';
 
+/**
+ * React component. Renders list item.
+ */
 const ListItem = ({ children }) => <StyledListItem>{children}</StyledListItem>;
 
 ListItem.propTypes = {

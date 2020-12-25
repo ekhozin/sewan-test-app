@@ -4,6 +4,10 @@ import PropTypes from 'prop-types';
 import { List, ListItem } from '@/components/common/List';
 import { EpisodeCard } from '@/components/common/EpisodeCard';
 
+/**
+ * React component. Rendes list of episodes.
+ * Each list item is represented by EpisodeCard-component.
+ */
 const EpisodesList = ({ items }) => (
     <List>
         {items.map((item) => (

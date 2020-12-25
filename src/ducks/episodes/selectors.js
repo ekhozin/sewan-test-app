@@ -15,6 +15,18 @@ const selectIsEpisodesLoading = (state) => selectEpisodesState(state).isLoading;
 
 const selectEpisode = (state) => selectEpisodesState(state).episode;
 
+/**
+ * Selector. Gets redux state and return list of episodes to render in React component.
+ * @returns {
+ *      {
+ *          id: string,
+ *          link: string,
+ *          name: string,
+ *          episode: string,
+ *          characters: { id: string, name: string, link: string }
+ *      }[]
+ * }
+ */
 const selectEpisodesToUIList = createSelector(
     selectEpisodesIds,
     selectEpisodesById,
@@ -37,6 +49,17 @@ const selectEpisodesToUIList = createSelector(
 
 const selectPagination = (state) => selectEpisodesState(state).pagination;
 
+/**
+ * Selector. Gets redux state and returns pagination for React component.
+ * @returns {
+ *      {
+ *          page: number,
+ *          prevPage: number|null,
+ *          nextPage: number|null,
+ *          isVisible: boolean
+ *      }
+ * }
+ */
 const selectPaginationToUI = createSelector(selectPagination, (pagination) => {
     const { next, prev, pages } = pagination;
     const page = prev === null ? next - 1 : prev + 1;
@@ -44,11 +67,25 @@ const selectPaginationToUI = createSelector(selectPagination, (pagination) => {
     return { page, prevPage: prev, nextPage: next, isVisible: pages > 1 };
 });
 
+/**
+ * Selector. Gets redux state and returns episode's info.
+ * @returns {{ name: string, airDate: string }}
+ */
 const selectEpisodeInfoToUI = createSelector(selectEpisode, ({ name, episode, airDate }) => ({
     name: episode ? `${episode}: ${name}` : EMPTY_STRING,
     airDate: airDate || EMPTY_STRING,
 }));
 
+/**
+ * Selector. Gets redux state and returns list of characters to render in React component.
+ * @returns {
+ *      {
+ *          id: string,
+ *          name: string,
+ *          link: string,
+ *      }[]
+ * }
+ */
 const selectEpisodeCharactersToUI = createSelector(selectEpisode, ({ characters = EMPTY_ARRAY }) =>
     characters.map(({ id, name }) => ({
         id,

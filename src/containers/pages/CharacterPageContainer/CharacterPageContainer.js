@@ -4,9 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { FullscreenLoader } from '@/components/common/FullscreenLoader';
 import { CharacterInfo } from '@/components/shared/CharacterInfo';
-import { fetchCharacterRequest, clearCharacter } from '@/ducks/characters/slice';
+import { fetchCharacterRequest, clearCharacter } from '@/ducks/characters/reducer';
 import { selectIsCharacterLoading, selectCharacter } from '@/ducks/characters/selectors';
 
+/**
+ * React component. Renders character's page connected to redux store.
+ */
 function CharacterPageContainer(props) {
     const {
         match: {

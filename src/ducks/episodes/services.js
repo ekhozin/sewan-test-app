@@ -2,7 +2,35 @@ import { gql } from '@apollo/client';
 
 import { client } from '@/client';
 
-function fetchEpisodes({ page = 1, search = '' } = {}) {
+/**
+ * Requests API to get list if episodes.
+ * @param {page} params.id Character's id.
+ * @param {string} params.search Search parameter.
+ * @returns {
+ *      Promise<{
+ *          data: {
+ *              episodes: {
+ *                  info: {
+ *                     next,
+ *                      prev,
+ *                      pages
+ *                  },
+ *                  results: {
+ *                      id: string,
+ *                      name: string,
+ *                      airDate: string,
+ *                      episode: string,
+ *                      characters: { id: string, name: string }[]
+ *                  }[]
+ *              }
+ *          }
+ *      }>
+ * }
+ */
+function fetchEpisodes(params) {
+    const search = params?.search || '';
+    const page = params?.page || 1;
+
     return client.query({
         query: gql`
             query {
@@ -28,6 +56,25 @@ function fetchEpisodes({ page = 1, search = '' } = {}) {
     });
 }
 
+/**
+ * Requests API to get episode's information by id.
+ * @param {string|number} id Episode's id.
+ * @returns {
+ *      Promise<{
+ *          data: {
+ *              episode: {
+ *                  {
+ *                      id: string,
+ *                      name: string,
+ *                      airDate: string,
+ *                      episode: string,
+ *                      characters: { id: string, name: string }[]
+ *                  }
+ *              }
+ *          }
+ *      }>
+ * }
+ */
 function fetchEpisode(id) {
     return client.query({
         query: gql`

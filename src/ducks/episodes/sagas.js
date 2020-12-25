@@ -10,13 +10,20 @@ import {
     fetchEpisodesSuccess,
     fetchEpisodeRequest,
     fetchEpisodeSuccess,
-} from './slice';
+} from './reducer';
 import { fetchEpisodes, fetchEpisode } from './services';
 import { mapEpisodes } from './mappers';
 
-function* fetchEpisodesSaga({ payload = {} }) {
+/**
+ * Redux saga. Handles Episodes list fetching.
+ * @param {number|string} action.payload.page Number of page
+ * @param {string} action.payload.search Search parameter
+ * @returns {Generator}
+ */
+function* fetchEpisodesSaga({ payload }) {
     try {
-        const { page, search } = payload;
+        const page = payload?.page;
+        const search = payload?.search;
         yield put(startIsLoading());
         const { data } = yield call(fetchEpisodes, { page, search });
         const { byId, ids, charactersById } = yield call(mapEpisodes, data.episodes?.results);
@@ -29,14 +36,18 @@ function* fetchEpisodesSaga({ payload = {} }) {
                 pagination,
             }),
         );
-    } catch (err) {
-        console.dir(err);
+    } catch {
         yield call(showErrorNotification, texts.fetchEpisodesError);
     } finally {
         yield put(stopIsLoading());
     }
 }
 
+/**
+ * Redux saga. Handles Episode fetching.
+ * @param {string} action.payload Episode's id.
+ * @returns {Generator}
+ */
 function* fetchEpisodeSaga({ payload: id }) {
     try {
         yield put(startIsLoading());
@@ -49,6 +60,10 @@ function* fetchEpisodeSaga({ payload: id }) {
     }
 }
 
+/**
+ * Watcher saga.
+ * @returns {Generator}
+ */
 function* watchEpisodesSaga() {
     yield all([
         takeLatest(fetchEpisodesRequest.type, fetchEpisodesSaga),

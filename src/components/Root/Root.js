@@ -8,6 +8,10 @@ import { App } from '@/components/App';
 import { store } from '@/store';
 import { theme } from '@/theme';
 
+/**
+ * React component.
+ * Renders App-component wrapped with redux Provider, router and theme provider.
+ */
 function Root() {
     return (
         <Provider store={store}>
